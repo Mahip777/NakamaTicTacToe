@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2019",
+    "module": "none",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "lib": ["es2019"],
+    "outDir": "build",
+    "rootDir": "src",
+    "types": []
+  },
+  "include": ["src/index.ts", "src/nakama.d.ts"]
+}

@@ -1,0 +1,13 @@
+{
+  "expo": {
+    "name": "LILA TicTacToe",
+    "slug": "lila-tictactoe",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "assetBundlePatterns": ["**/*"],
+    "android": {
+      "usesCleartextTraffic": true
+    }
+  }
+}

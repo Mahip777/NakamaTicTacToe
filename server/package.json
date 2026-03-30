@@ -1,0 +1,12 @@
+{
+  "name": "lila-nakama-runtime",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "powershell -Command \"if (Test-Path build) { Remove-Item -Recurse -Force build }\""
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2"
+  }
+}

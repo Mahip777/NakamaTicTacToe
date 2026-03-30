@@ -1,0 +1,48 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: lila-postgres
+    environment:
+      POSTGRES_DB: nakama
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: localdbpassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres/init:/docker-entrypoint-initdb.d
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d nakama"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  nakama:
+    image: heroiclabs/nakama:3.22.0
+    container_name: lila-nakama
+    entrypoint:
+      - "/bin/sh"
+      - "-ecx"
+      - >
+        /nakama/nakama migrate up --database.address postgres:localdbpassword@postgres:5432/nakama &&
+        exec /nakama/nakama --name nakama1
+        --database.address postgres:localdbpassword@postgres:5432/nakama
+        --logger.level INFO
+        --session.token_expiry_sec 7200
+        --runtime.path /nakama/data/modules/build
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "7349:7349"
+      - "7350:7350"
+      - "7351:7351"
+    volumes:
+      - ../server/build:/nakama/data/modules/build
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

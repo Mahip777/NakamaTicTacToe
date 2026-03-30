@@ -1,0 +1,21 @@
+# Node
+node_modules/
+npm-debug.log*
+
+# Build outputs
+build/
+dist/
+
+# Expo / RN
+.expo/
+.expo-shared/
+android/
+ios/
+
+# Env
+.env
+.env.*
+
+# OS / editor
+.DS_Store
+Thumbs.db
